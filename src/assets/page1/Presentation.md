@@ -1,6 +1,6 @@
-## Svelte Presentation
+##  Presentation
 
-tHIS IS A NEW presentatiuon
+Changedwords
 
 ![Slide1](/presentation/src/assets/page1/images/Slide1.PNG)
 
