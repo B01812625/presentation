@@ -1,365 +1,61 @@
-## Svelte Tutorial
+## Graghql Setup Tutorial
 
-### Setup
+What is GraphQL?
+GraphQL is an API query language developed by Facebook that allows you to request the exact data you need without any redundancy. Unlike REST, where fixed endpoints always return predefined data, GraphQL allows you to customize the response structure.
 
-The object here is to demonstrate that Svelte can be used as an effective alternative to React to display the list of users from the typicode API.  You can be the judge of whether the syntax is more or less comfortable to work with.  If you want to go further you can extend to read from other typicode API content.
+Now, let's start installing and using it.
 
-To start off I will make a new github repository named SvelteTS23 and clone this to my local machine.
+### About Installation:
 
-Within visual studio code open this folder in a container which is for node and typescript.
+Step1:Setting Up GraphQL with Node.
+You’ll start by creating a basic file structure and a sample code snippet.
+First, create a GraphQL directory:
 
-![container type](/presentation/src/assets/page2/images/containerType.png)
+![1](/presentation/src/assets/page2/images/1.png)
 
-Choose the recent version of node.
+Change into the new directory:
 
-![bullseye](/presentation/src/assets/page2/images/bullseye.png)
+![2](/presentation/src/assets/page2/images/2.png)
 
-Choose no additional options.
+Initialize an npm project:
 
-![no options](/presentation/src/assets/page2/images/noOptions.png)
+![3](/presentation/src/assets/page2/images/3.png)
 
-Allow time for the DevContainer to start, then check the node version.
+Then create the server.js file which will be the main file:
 
-> node --version
+![4](/presentation/src/assets/page2/images/4.png)
 
-```code
-v20.3.1
-```
+Your project should resemble the following:
 
-Now create a svelte app using the latest version.
+![5](/presentation/src/assets/page2/images/5.png)
 
-> npm create svelte@latest my-app
+Necessary packages will be discussed in this tutorial as they are implemented. Next, set up a server using Express and express-graphql, an HTTP server middleware:
 
-```code
-Need to install the following packages:
-  create-svelte@5.1.1
-Ok to proceed? (y) 
-```
+![6](/presentation/src/assets/page2/images/6.png)
 
-Yes to proceed (y).
+### About coding: 
 
-Select a skeleton project rather than a demo file or library project.
+Step1:
+Open server.js file and add the following lines of code.
+This snippet accomplishes several things. It uses require to include the packages that were installed. It also initializes generic schema and root values. Furthermore, it creates an endpoint at /graphql which can be visited with a web browser.
+Save and close the file after making these changes.
 
-```code
-create-svelte version 5.1.1
+![7](/presentation/src/assets/page2/images/7.png)
 
-┌  Welcome to SvelteKit!
-│
-◆  Which Svelte app template?
-│  ○ SvelteKit demo app
-│  ● Skeleton project (Barebones scaffolding for your new SvelteKit app)
-│  ○ Library project
-└
-```
+Step2: Defining a Schema.
+In the GraphQL schema language, you might represent a user with an id, name,email,and age like this example:
 
-Use Typescript
+![8](/presentation/src/assets/page2/images/8.png)
 
-```code
- Welcome to SvelteKit!
-│
-◇  Which Svelte app template?
-│  Skeleton project
-│
-◆  Add type checking with TypeScript?
-│  ○ Yes, using JavaScript with JSDoc comments
-│  ● Yes, using TypeScript syntax
-│  ○ No
-```
+Step3:Set parser.
+Schema sets the way to build queries, but building a schema to define data schemas is only part of the GraphQL specification. The other part involves actually obtaining data by using a parser, which is a function that returns the basic value of a field.
 
-Add prettier code formatting.
+![9](/presentation/src/assets/page2/images/9.png)
 
-```code
-Select additional options (use arrow keys/space bar)
-│  ◻ Add ESLint for code linting
-│  ◼ Add Prettier for code formatting
-│  ◻ Add Playwright for browser testing
-│  ◻ Add Vitest for unit testing
-```
+Step4:Run Server。
+Finally, let's run the demo! Because we use Express, we can use the express graphql package to expose our pattern as an endpoint.
 
-Code is ready!
+![10](/presentation/src/assets/page2/images/10.png)
 
-```code
-  Your project is ready!
-
-✔ Typescript
-  Inside Svelte components, use <script lang="ts">
-
-✔ Prettier
-  https://prettier.io/docs/en/options.html
-  https://github.com/sveltejs/prettier-plugin-svelte#options
-
-Install community-maintained integrations:
-  https://github.com/svelte-add/svelte-add
-
-Next steps:
-  1: cd my-app
-  2: npm install
-  3: git init && git add -A && git commit -m "Initial commit" (optional)
-  4: npm run dev -- --open
-
-To close the dev server, hit Ctrl-C
-
-Stuck? Visit us at https://svelte.dev/chat
-```
-
-Don't bother to update the npm version.
-
-```code
-npm notice 
-npm notice New major version of npm available! 9.6.7 -> 10.2.0
-npm notice Changelog: https://github.com/npm/cli/releases/tag/v10.2.0
-npm notice Run npm install -g npm@10.2.0 to update!
-npm notice 
-```
-
-> cd my-app
-
-Install the dependancies currently in package.json
-
-> npm install
-
-This takes a while.
-
-```code
-12 packages are looking for funding
-  run `npm fund` for details
-
-3 low severity vulnerabilities
-
-To address all issues (including breaking changes), run:
-  npm audit fix --force
-
-Run `npm audit` for details.
-```
-Svelte has onlyrecently moved to version 4 and has gone up in version to 4.2.1 so adjust my-app/package.json to use the latest version.
-
-```json
-	"devDependencies": {
-		"@sveltejs/adapter-auto": "^2.0.0",
-		"@sveltejs/kit": "^1.20.4",
-		"prettier": "^2.8.0",
-		"prettier-plugin-svelte": "^2.10.1",
-		"svelte": "^4.2.1",
-		"svelte-check": "^3.4.3",
-		"tslib": "^2.4.1",
-		"typescript": "^5.0.0",
-		"vite": "^4.4.2"
-	},
-```
-
-Sveltestrap is not fully updated to Svelte version 4 so as a work around cd .. back to the folder SvelteTS23 and add add a package.json file.
-
-```json
-{
-    "dependencies": {
-        "svelte": "^3.59.2",
-        "sveltestrap": "^5.11.2",
-        "vite":"4.4.11"
-    }
-}    
-```
-
-> npm install
-
-Now change directory back to my-app.
-
->cd my-app
-
-> npm install --save sveltestrap svelte
-
-Finally install the axios library to retrieve json data from a rest API.
-
-> npm i axios@1.5.1
-
-### Svelte code
-
-Check the contents of app.html in the src folder
-
-app.html
-```html
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		%sveltekit.head%
-	</head>
-	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">%sveltekit.body%</div>
-	</body>
-</html>
-```
-
-Then start to edit +page.svelte in the routes folder.
-
-```javascript
-<svelte:head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</svelte:head>
-```
-Sveltestrap is only a wrapper for bootstrap and does not include the bootstrap CSS.  This can be included in a number of different ways described on the sveltestrap site, but until versioning is completely compatible with Svelte 4 this is a reliable way to bring the css in from a contend delivery network.
-
-This code will insert into the head of the html file.
-
-```javascript          
-
-<script lang="ts">
-  import { onMount } from "svelte";
-  import axios from "axios";
-  import { Card,
-    CardBody,
-    CardFooter,
-    CardHeader,
-    CardSubtitle,
-    CardText,
-    CardTitle } from "sveltestrap"; 
-```
-The lang="ts" identifies this script as typescript.
-
-The import of onMount allows svelte to perform programmed functions when the page loads.
-
-Axios is the library to retrieve JSON from the rest API.  This can be used as an alternative to fetch as discussed by [David Adeneye](https://www.sitepoint.com/svelte-fetch-data/).
-
-The Card elements are imports from the sveltstrap library.  [The components available are listed](https://sveltestrap.js.org/v4/?path=/story/components--get-started).
-
-
-
-```javascript
-
-const endpoint = "https://jsonplaceholder.typicode.com/users";
-
-interface Company{
-  name:string
-  catchPhrase:string;
-  bs:string;
-}
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  company:Company;
-}
-
-let values: User[] = [];
-```
-The endpoint is defined as a convenience.
-
-For typescript the array of values must have a type of structure which matches the JSON data so interfaces are set up to match the data.
-
-
-```javascript
-onMount(async function () {
-  const response = await axios.get(endpoint);
-  console.log(response.data);
-  values = response.data;
-});
-
-</script>
-```
-The asynchronous function retrieves data from the endpoint and stores response data into the values array.
-
-```javascript
-
-{#each values as item}               
-<Card color="success">
-  <CardHeader>
-    <CardTitle>{item.name}</CardTitle>
-  </CardHeader>
-  <CardBody>
-    <CardSubtitle>{item.email}</CardSubtitle>
-    <CardText>
-      {item.company.name}
-    </CardText>
-  </CardBody>
-  <CardFooter>    
-      {item.company.catchPhrase}
-  </CardFooter>
-</Card>
-<br/>
-{/each}
-```
-
-The #each ... /each syntax iterates around the values array storing one array element as item on each iteration.
-
-item has the sturucture of a User so its company fields can be accessed and information is rendered on screen.
-
-A color is added to the card, you can experiment with the styling of the card.
-
-The full listing is 
-**my-app/presentation/src/routes/+page.svelte**
-```javascript
-<svelte:head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</svelte:head>
-          
-
-<script lang="ts">
-  import { onMount } from "svelte";
-  import axios from "axios";
-  import { Card,
-    CardBody,
-    CardFooter,
-    CardHeader,
-    CardSubtitle,
-    CardText,
-    CardTitle } from "sveltestrap"; 
-
-
-const endpoint = "https://jsonplaceholder.typicode.com/users";
-
-interface Company{
-  name:string
-  catchPhrase:string;
-  bs:string;
-}
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  company:Company;
-}
-
-let values: User[] = [];
-
-onMount(async function () {
-  const response = await axios.get(endpoint);
-  console.log(response.data);
-  values = response.data;
-});
-
-</script>
-
-{#each values as item}               
-<Card color="success">
-  <CardHeader>
-    <CardTitle>{item.name}</CardTitle>
-  </CardHeader>
-  <CardBody>
-    <CardSubtitle>{item.email}</CardSubtitle>
-    <CardText>
-      {item.company.name}
-    </CardText>
-  </CardBody>
-  <CardFooter>    
-      {item.company.catchPhrase}
-  </CardFooter>
-</Card>
-<br/>
-{/each}
-
-
-<card >
-	{#each values as item}
-                  <option value={item.id}>{item.name}</option>
-                {/each}
-</card>
-```
-
-The working output is then:
-
-![user list](/presentation/src/assets/page2/images/userList.png)
-
-The Svelte code is pretty straight forward, the biggest difficulty was the versioning changes around the style sheet code, that should be fixed in time.
+### Conclusion
+So far we have covered from very basic concepts of GraphQL to some fairly complex examples. Most of these examples clearly reveal the differences between GraphQL and REST for users who have interacted with REST. 
